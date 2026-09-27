@@ -682,6 +682,12 @@ If the `codex` CLI is not installed or not on `PATH`, `codex_local` agent runs f
 
 Local adapters require their corresponding CLI/session setup on the machine running Paperclip. External adapters are installed through the adapter/plugin flow and should not require hardcoded imports in `server/` or `ui/`.
 
+## Running locally with Claude Code agents
+
+This Paperclip instance runs entirely on your machine, with its agents on the Claude Code adapter (`claude_local`). Each heartbeat spawns your locally installed `claude` CLI as a subprocess, so there is no hosted agent runtime involved; Paperclip assumes the CLI is already installed, on `PATH`, and authenticated on the host.
+
+Runs execute in the task's resolved execution workspace, falling back to the agent home workspace described in "Default Agent Workspaces" above. Per-agent working directory, timeout, env vars, and extra CLI args come from the agent's adapter config — see [spec/agents-runtime.md](./spec/agents-runtime.md) for the full runtime settings.
+
 ## Project Repository Checkouts
 
 Tasks use every distinct repository attached to their project, including repository-only sources with no local folder. Paperclip creates a managed checkout when no local folder is configured. The selected repository remains at the task workspace root. Other project repositories have editable, independent Git checkouts under `.paperclip-repositories/<name>-<key>`. Workspace hints expose each checkout path to the agent.
