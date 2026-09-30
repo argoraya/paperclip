@@ -548,6 +548,14 @@ Slack callback diagnostics tolerate HTTP between a TLS proxy and Paperclip when 
 port, and path still match. A changed authority or path remains stale. This comparison only affects
 health display; it does not trust forwarded headers or alter Slack signature verification.
 
+## Running locally with Claude Code agents
+
+This Paperclip instance runs locally, with its agents on the Claude Code
+(`claude_local`) adapter. That adapter shells out to the `claude` CLI installed on
+the host machine, so agent runs use your local CLI installation and its existing
+authentication rather than a hosted runner. Make sure `claude` is on your `PATH`
+and logged in before starting the server; see
+[`doc/spec/agents-runtime.md`](./spec/agents-runtime.md) for the full adapter list.
 
 ## Docker Quickstart (No local Node install)
 
